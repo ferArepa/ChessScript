@@ -28,6 +28,11 @@ const userInput = async () => {
     process.stdin.on("keypress", (entrada, key) => {
         // console.log("ingrese su movimiento")
         console.clear();
+        console.log(key.name);
+        if (key.name === "s") {
+            // console.log("enter")
+            (0, puntero_1.seleccionarPieza)();
+        }
         if (key.name === "up") {
             console.log("arriba");
             (0, puntero_1.moverPuntero)(key.name);

@@ -6,7 +6,7 @@ exports.Piece = void 0;
 class Piece {
     // pieceMoves:[] = []
     selected = false;
-    look = "X";
+    look = "☒";
     // pieceType:pieceType
     position = {
         X: 0,

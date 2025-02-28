@@ -2,7 +2,7 @@ import { renderizarTablero } from "../render/tablero-render";
 
 import readline, { Key } from 'readline'
 
-import { moverPuntero } from '../classes/puntero/puntero';
+import { moverPuntero, seleccionarPieza } from '../classes/puntero/puntero';
 
 export const userInput = async() =>  {
 
@@ -42,6 +42,15 @@ export const userInput = async() =>  {
             // console.log("ingrese su movimiento")
 
             console.clear()
+
+            console.log(key.name)
+
+            if (key.name === "s"){  
+                
+                // console.log("enter")
+                seleccionarPieza()
+            
+            }
 
             if (key.name === "up"){  
                 

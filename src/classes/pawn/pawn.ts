@@ -18,32 +18,34 @@ export class Pawn extends Piece {
 
     // pero si la propiedad es independiente de lo que se pasa
     // al constructor entonces es mejor crearla y asignar directamente el valor
-
+    black: boolean;
     look: string;
     firstMove: boolean = true;
     constructor(starposX:number, startposY:number, black:boolean = false){
         super(starposX,startposY)
 
         this.look = black ? "♟":"♙" 
+        this.black = black
 
     }
-    mostrarMovimientos(): void {
-        
-        if(this.firstMove){
+    mostrarMovimientos(notShowable:boolean = false): void {
 
-            tablero[this.position.X - 1][this.position.Y] = "•"
-            tablero[this.position.X - 2][this.position.Y] = "•"
+        if(notShowable){ return }
 
+        if(!this.black){
+            this.mostrarMovimientosWhite()
         }
         else{
-            tablero[this.position.X - 1][this.position.Y] = "•"
+            this.mostrarMovimientosBlack()
         }
+        // antes de moverse el pointer debera de llamar al metodo
+        // ocultar casillas 
 
         // este metodo sera llamado por el pointer 
         // si se encuentra encima de la pieza y es el turno del
         // jugador que tiene esa pieza
         
-        // lo que ahra sera verificar si es el primer movimiento
+        // lo que hara sera verificar si es el primer movimiento
         // si lo es, desplegara 2 casillas hacia arriba cambiandoles
         // la apariencia sino solo 1, 
 
@@ -52,7 +54,18 @@ export class Pawn extends Piece {
         // de las que muestra este metodo
 
     }
+    ocultarMovimientos(holdear:boolean = false):void {
 
+        if(holdear){ return }
+
+        if(!this.black){
+            this.ocultarMovimientosWhite()
+        }
+        else{
+            this.ocultarMovimientosBlack()
+        }
+
+    }
 
     verificarMovimiento(): void {
         
@@ -62,6 +75,67 @@ export class Pawn extends Piece {
         
 
     }
+
+    private mostrarMovimientosWhite(){
+
+        if(this.firstMove && !this.black){
+
+            tablero[this.position.X + 1][this.position.Y] = "•"
+            tablero[this.position.X + 2][this.position.Y] = "•"
+            return
+        }
+        if (!this.firstMove && !this.black){
+            tablero[this.position.X + 1][this.position.Y] = "•"
+            return
+        }
+
+    }
+    private mostrarMovimientosBlack(){
+
+        if(this.firstMove && this.black){
+
+            tablero[this.position.X - 1][this.position.Y] = "•"
+            tablero[this.position.X - 2][this.position.Y] = "•"
+            return
+
+        }
+        if(this.firstMove && this.black){
+            tablero[this.position.X - 1][this.position.Y] = "•"
+            return
+        }
+
+    }
+    
+    private ocultarMovimientosWhite(){
+
+        if(this.firstMove && !this.black){
+
+            tablero[this.position.X + 1][this.position.Y] = "□"
+            tablero[this.position.X + 2][this.position.Y] = "□"
+            return
+        }
+        if (!this.firstMove && !this.black){
+            tablero[this.position.X + 1][this.position.Y] = "□"
+            return
+        }
+
+    }
+    private ocultarMovimientosBlack(){
+
+        if(this.firstMove && this.black){
+
+            tablero[this.position.X - 1][this.position.Y] = "□"
+            tablero[this.position.X - 2][this.position.Y] = "□"
+            return
+
+        }
+        if(this.firstMove && this.black){
+            tablero[this.position.X - 1][this.position.Y] = "□"
+            return
+        }
+
+    }
+
 
     protected moverse(): void {
         

@@ -8,7 +8,7 @@ import {renderizarTablero} from './src/render/tablero-render'
 import { Pawn } from "./src/classes/pawn/pawn"
 
 
-let peon1 = new Piece(1,0)
+let peon1 = new Pawn(1,0)
 let peon2 = new Pawn(1,1)
 let peon3 = new Pawn(1,2)
 let peon4 = new Pawn(1,3)

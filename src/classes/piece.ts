@@ -30,7 +30,7 @@ export class Piece {
 
     // pieceMoves:[] = []
     selected: boolean = false;
-    look: string = "X";
+    look: string = "☒";
     // pieceType:pieceType
     position:pos = {
 

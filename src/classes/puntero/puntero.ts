@@ -18,16 +18,35 @@ type Puntero = {
 
 
 }
-//  skins = ♘,♞,♖,█
-let puntero: Puntero = {
+//  skins = ♘,♞,♖,█,☐,☵,⛘,⛆
+const puntero: Puntero = {
 
     selected: false,
-    look: " ",
+    look: "☐",
     posX: 3,
     posY: 3
 
 }
 
+let casillaGuardada: string = "□"
+let piezaSelected: Pawn;
+export const seleccionarPieza = (): void => {
+
+    puntero.look = puntero.selected ? "☐" : "☑"
+    Tablero[puntero.posX][puntero.posY] = puntero.look
+
+    if (puntero.selected){ piezaSelected.ocultarMovimientos() }
+
+    puntero.selected = !puntero.selected
+    console.log(puntero.posX, puntero.posY)
+
+    if(tableroVirtual[puntero.posX][puntero.posY] instanceof Pawn ){
+        piezaSelected = tableroVirtual[puntero.posX][puntero.posY] as Pawn
+        // (tableroVirtual[puntero.posX][puntero.posY] as Pawn).mostrarMovimientos()
+    }
+
+    return
+}
 
 // X va de arriba a abajo y Y va de izquierda a derecha
 
@@ -68,15 +87,15 @@ const guardarCasilla = (movimiento: string): string | undefined => {
     }
 }
 
-let casillaGuardada: string = "□"
-
 export const moverPuntero = (movimiento: string): void => {
 
     let moveXY: number = tablaHash.get(movimiento) as number
 
+    if (casillaGuardada )
+
     if(tableroVirtual[puntero.posX][puntero.posY] instanceof Pawn ){
 
-        (tableroVirtual[puntero.posX][puntero.posY] as Pawn).mostrarMovimientos()
+        (tableroVirtual[puntero.posX][puntero.posY] as Pawn).ocultarMovimientos(puntero.selected)
     }
 
     
@@ -99,6 +118,11 @@ export const moverPuntero = (movimiento: string): void => {
 
             Tablero[puntero.posX][puntero.posY] = puntero.look
 
+            if(tableroVirtual[puntero.posX][puntero.posY] instanceof Pawn ){
+
+                (tableroVirtual[puntero.posX][puntero.posY] as Pawn).mostrarMovimientos(puntero.selected)
+            }
+
         }
         console.log(puntero.posX, puntero.posY)
 
@@ -116,6 +140,11 @@ export const moverPuntero = (movimiento: string): void => {
             puntero.posY += moveXY
 
             Tablero[puntero.posX][puntero.posY] = puntero.look
+
+            if(tableroVirtual[puntero.posX][puntero.posY] instanceof Pawn ){
+
+                (tableroVirtual[puntero.posX][puntero.posY] as Pawn).mostrarMovimientos(puntero.selected)
+            }
             // casillaGuardada = Tablero[puntero.posX][puntero.posY + moveXY];
 
         }

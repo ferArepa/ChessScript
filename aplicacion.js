@@ -2,10 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const tablero_1 = require("./src/state/tablero");
 const input_keyboard_1 = require("./src/input/input-keyboard");
-const piece_1 = require("./src/classes/piece");
 const tablero_render_1 = require("./src/render/tablero-render");
 const pawn_1 = require("./src/classes/pawn/pawn");
-let peon1 = new piece_1.Piece(1, 0);
+let peon1 = new pawn_1.Pawn(1, 0);
 let peon2 = new pawn_1.Pawn(1, 1);
 let peon3 = new pawn_1.Pawn(1, 2);
 let peon4 = new pawn_1.Pawn(1, 3);

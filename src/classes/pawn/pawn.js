@@ -14,31 +14,92 @@ class Pawn extends piece_1.Piece {
     // el constructor
     // pero si la propiedad es independiente de lo que se pasa
     // al constructor entonces es mejor crearla y asignar directamente el valor
+    black;
     look;
     firstMove = true;
     constructor(starposX, startposY, black = false) {
         super(starposX, startposY);
         this.look = black ? "♟" : "♙";
+        this.black = black;
     }
-    mostrarMovimientos() {
-        if (this.firstMove) {
-            tablero_1.tablero[this.position.X - 1][this.position.Y] = "•";
-            tablero_1.tablero[this.position.X - 2][this.position.Y] = "•";
+    mostrarMovimientos(notShowable = false) {
+        if (notShowable) {
+            return;
+        }
+        if (!this.black) {
+            this.mostrarMovimientosWhite();
         }
         else {
-            tablero_1.tablero[this.position.X - 1][this.position.Y] = "•";
+            this.mostrarMovimientosBlack();
         }
+        // antes de moverse el pointer debera de llamar al metodo
+        // ocultar casillas 
         // este metodo sera llamado por el pointer 
         // si se encuentra encima de la pieza y es el turno del
         // jugador que tiene esa pieza
-        // lo que ahra sera verificar si es el primer movimiento
+        // lo que hara sera verificar si es el primer movimiento
         // si lo es, desplegara 2 casillas hacia arriba cambiandoles
         // la apariencia sino solo 1, 
         // si el pointer selecciona la casilla donde esta el pawn,
         // ahora el pointer podra seleccionar una casilla a moverse
         // de las que muestra este metodo
     }
+    ocultarMovimientos(holdear = false) {
+        if (holdear) {
+            return;
+        }
+        if (!this.black) {
+            this.ocultarMovimientosWhite();
+        }
+        else {
+            this.ocultarMovimientosBlack();
+        }
+    }
     verificarMovimiento() {
+    }
+    mostrarMovimientosWhite() {
+        if (this.firstMove && !this.black) {
+            tablero_1.tablero[this.position.X + 1][this.position.Y] = "•";
+            tablero_1.tablero[this.position.X + 2][this.position.Y] = "•";
+            return;
+        }
+        if (!this.firstMove && !this.black) {
+            tablero_1.tablero[this.position.X + 1][this.position.Y] = "•";
+            return;
+        }
+    }
+    mostrarMovimientosBlack() {
+        if (this.firstMove && this.black) {
+            tablero_1.tablero[this.position.X - 1][this.position.Y] = "•";
+            tablero_1.tablero[this.position.X - 2][this.position.Y] = "•";
+            return;
+        }
+        if (this.firstMove && this.black) {
+            tablero_1.tablero[this.position.X - 1][this.position.Y] = "•";
+            return;
+        }
+    }
+    ocultarMovimientosWhite() {
+        if (this.firstMove && !this.black) {
+            tablero_1.tablero[this.position.X + 1][this.position.Y] = "□";
+            tablero_1.tablero[this.position.X + 2][this.position.Y] = "□";
+            return;
+        }
+        if (!this.firstMove && !this.black) {
+            tablero_1.tablero[this.position.X + 1][this.position.Y] = "□";
+            return;
+        }
+    }
+    ocultarMovimientosBlack() {
+        if (this.firstMove && this.black) {
+            tablero_1.tablero[this.position.X - 1][this.position.Y] = "□";
+            tablero_1.tablero[this.position.X - 2][this.position.Y] = "□";
+            return;
+        }
+        if (this.firstMove && this.black) {
+            tablero_1.tablero[this.position.X - 1][this.position.Y] = "□";
+            return;
+        }
     }
     moverse() {
     }

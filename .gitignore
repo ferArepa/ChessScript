@@ -1,0 +1,15 @@
+# Ignorar node_modules y dependencias
+node_modules/
+package-lock.json
+
+# Ignorar archivos de compilación
+dist/
+build/
+
+# Ignorar configuraciones del sistema
+.DS_Store
+thumbs.db
+
+# Ignorar archivos de entorno
+.env
+.env.local
